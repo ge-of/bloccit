@@ -1,0 +1,2 @@
+module AdverisementsHelper
+end
