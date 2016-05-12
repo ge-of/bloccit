@@ -22,7 +22,7 @@ require 'random_data'
  end
 
  Post.find_or_create_by(title: "I am a banana", body: "I am indeed a banana")
-
+ Comment.find_or_create_by(post: "I am a banana", body: "No wai; ya wai")
  puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
