@@ -2,13 +2,16 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 
-let(:my_post) {Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
+  let!(:my_post) { Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
   describe "GET #index" do
     it "returns http success" do
+      p Post.count
       get :index
+      my_post
+      p my_post
       expect(response).to have_http_status(:success)
+      p Post.count
     end
-  end
 
     it "assigns [my_post] to @posts" do
       get :index
@@ -16,22 +19,21 @@ let(:my_post) {Post.create!(title: RandomData.random_sentence, body: RandomData.
     end
   end
 
-
   describe "GET show" do
-  it "returns http success" do
-    get :show, {id: my_post.id}
-    expect(response).to have_http_status(:success)
-  end
-  it "renders the #show view" do
-    get :show, {id: my_post.id}
-    expect(response).to render_template :show
-  end
+    it "returns http success" do
+      get :show, {id: my_post.id}
+      expect(response).to have_http_status(:success)
+    end
+    it "renders the #show view" do
+      get :show, {id: my_post.id}
+      expect(response).to render_template :show
+    end
 
-  it "assigns my_post to @post" do
-    get :show, {id: my_post.id}
-    expect(assigns(:post)).to eq(my_post)
+    it "assigns my_post to @post" do
+      get :show, {id: my_post.id}
+      expect(assigns(:post)).to eq(my_post)
+    end
   end
-end
 
   describe "GET new" do
     it "returns http success" do
@@ -76,3 +78,4 @@ end
   #     expect(response).to have_http_status(:success)
   #   end
   # end
+end
