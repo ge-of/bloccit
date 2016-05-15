@@ -2,7 +2,7 @@ require 'rails_helper'
 include RandomData
 RSpec.describe AdverisementsController, type: :controller do
 
-let(:my_ad) do
+let!(:my_ad) do
   Adverisement.create(
     id: 1,
     title: RandomData.random_sentence,
@@ -19,7 +19,7 @@ let(:my_ad) do
 
     it "assigns [my_ad] to @adverisements" do
       get :index
-      expect(assigns(adverisements)).to eq([my_ad])
+      expect(assigns(:adverisements)).to eq([my_ad])
     end
   end
 
@@ -42,8 +42,7 @@ let(:my_ad) do
 
   describe "POST create" do
     it "increases the number of adverisements by 1" do
-      expect{post :create, advertisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 99}}.to
-      change(Adverisement,:count).by(1)
+      expect{post :create, adverisement: {title: RandomData.random_sentence, copy: RandomData.random_paragraph, price: 99}}.to(change(Adverisement,:count).by(1))
     end
 
     it "assigns the new adverisment to @adverisement" do

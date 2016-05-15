@@ -17,7 +17,7 @@ class AdverisementsController < ApplicationController
     @adverisement.copy = params[:adverisement][:copy]
     @adverisement.price = params[:adverisement][:price]
 
-    if @adverisement.saved
+    if @adverisement.save
       flash[:notice] = "Adverisement was saved."
       redirect_to @adverisement
     else
