@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
 
-let(:my_post) {Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
+  let(:my_post) {Post.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph) }
   describe "GET #index" do
     it "returns http success" do
       get :index
@@ -10,28 +10,27 @@ let(:my_post) {Post.create!(title: RandomData.random_sentence, body: RandomData.
     end
   end
 
-    it "assigns [my_post] to @posts" do
-      get :index
-      expect(assigns(:posts)).to eq([my_post])
-    end
+  it "assigns [my_post] to @posts" do
+    get :index
+    expect(assigns(:posts)).to eq([my_post])
   end
 
 
   describe "GET show" do
-  it "returns http success" do
-    get :show, {id: my_post.id}
-    expect(response).to have_http_status(:success)
-  end
-  it "renders the #show view" do
-    get :show, {id: my_post.id}
-    expect(response).to render_template :show
-  end
+    it "returns http success" do
+      get :show, {id: my_post.id}
+      expect(response).to have_http_status(:success)
+    end
+    it "renders the #show view" do
+      get :show, {id: my_post.id}
+      expect(response).to render_template :show
+    end
 
-  it "assigns my_post to @post" do
-    get :show, {id: my_post.id}
-    expect(assigns(:post)).to eq(my_post)
+    it "assigns my_post to @post" do
+      get :show, {id: my_post.id}
+      expect(assigns(:post)).to eq(my_post)
+    end
   end
-end
 
   describe "GET new" do
     it "returns http success" do
@@ -72,30 +71,30 @@ end
   end
 
   describe "GET edit" do
-     it "returns http success" do
-       get :edit, {id: my_post.id}
-       expect(response).to have_http_status(:success)
-     end
+    it "returns http success" do
+      get :edit, {id: my_post.id}
+      expect(response).to have_http_status(:success)
+    end
 
-     it "renders the #edit view" do
-       get :edit, {id: my_post.id}
-       expect(response).to render_template :edit
-     end
+    it "renders the #edit view" do
+      get :edit, {id: my_post.id}
+      expect(response).to render_template :edit
+    end
 
-     it "assigns post to be updated to @post" do
-       get :edit, {id: my_post.id}
+   it "assigns post to be updated to @post" do
+     get :edit, {id: my_post.id}
 
-       post_instance = assigns(:post)
+     post_instance = assigns(:post)
 
-       expect(post_instance.id).to eq my_post.id
-       expect(post_instance.title).to eq my_post.title
-       expect(post_instance.body).to eq my_post.body
-     end
+     expect(post_instance.id).to eq my_post.id
+     expect(post_instance.title).to eq my_post.title
+     expect(post_instance.body).to eq my_post.body
    end
+ end
 
-   describe "DELETE destroy" do
-  it "deletes the post" do
-    delete :destroy, {id: my_post.id}
+ describe "DELETE destroy" do
+   it "deletes the post" do
+     delete :destroy, {id: my_post.id}
 # #6
     count = Post.where({id: my_post.id}).size
     expect(count).to eq 0
@@ -120,7 +119,7 @@ end
       expect(updated_post.id).to eq my_post.id
       expect(updated_post.title).to eq new_title
       expect(updated_post.body).to eq new_body
-  end
+    end
 
     it "redirects to the updated post" do
       new_title = RandomData.random_sentence
@@ -129,5 +128,6 @@ end
 # #4
     put :update, id: my_post.id, post: {title: new_title, body: new_body}
     expect(response).to redirect_to my_post
+    end
   end
 end
