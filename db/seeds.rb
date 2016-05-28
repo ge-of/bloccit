@@ -1,28 +1,27 @@
-require 'random_data'
+include RandomData
 
  # Create Posts
- 50.times do
+50.times do
  # #1
-   Post.create!(
- # #2
-     title:  RandomData.random_sentence,
-     body:   RandomData.random_paragraph
-   )
- end
- posts = Post.all
+ Post.create!(
+   title:  RandomData.random_sentence,
+   body:   RandomData.random_paragraph
+ )
+end
+posts = Post.all
 
  # Create Comments
- # #3
- 100.times do
-   Comment.create!(
- # #4
-     post: posts.sample,
-     body: RandomData.random_paragraph
-   )
- end
+100.times do
+ Comment.create!(
+   post: posts.sample,
+   body: RandomData.random_paragraph
+ )
+end
 
- Post.find_or_create_by(title: "I am a banana", body: "I am indeed a banana")
- Comment.find_or_create_by(post: "I am a banana", body: "No wai; ya wai")
- puts "Seed finished"
- puts "#{Post.count} posts created"
- puts "#{Comment.count} comments created"
+puts "#{Post.count}"
+Post.find_or_create_by(title: "Unique title", body: "IUnique body")
+puts "#{Post.count}"
+
+puts "Seed finished"
+puts "#{Post.count} posts created"
+puts "#{Comment.count} comments created"
