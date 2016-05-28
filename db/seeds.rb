@@ -1,4 +1,4 @@
-require 'random_data'
+include RandomData
 
  # Create Posts
  50.times do
@@ -18,6 +18,15 @@ require 'random_data'
  # #4
      post: posts.sample,
      body: RandomData.random_paragraph
+   )
+ end
+
+ #Create questions
+ 100.times do
+   Question.create!(
+    title: RandomData.random_sentence,
+    body: RandomData.random_paragraph,
+    resolved: false
    )
  end
 
