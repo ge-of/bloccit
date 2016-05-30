@@ -66,16 +66,16 @@ RSpec.describe TopicsController, type: :controller do
 
   describe "SPONSORED_POST create" do
     it "increases the number of topics by 1" do
-      expect{ sponsored_post :create, {topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}}}.to change(Topic,:count).by(1)
+      expect{ post :create, {topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}}}.to change(Topic,:count).by(1)
     end
 
     it "assigns Topic.last to @topic" do
-      sponsored_post :create, {topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}}
+      post :create, {topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}}
       expect(assigns(:topic)).to eq Topic.last
     end
 
     it "redirects to the new topic" do
-      sponsored_post :create, {topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}}
+      post :create, {topic: {name: RandomData.random_sentence, description: RandomData.random_paragraph}}
       expect(response).to redirect_to Topic.last
     end
   end
