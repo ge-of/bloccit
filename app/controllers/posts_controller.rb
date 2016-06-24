@@ -44,6 +44,8 @@ class PostsController < ApplicationController
   end
 
   def update
+    p 'looking for post with id ', params[:id]
+    p Post.pluck(:id)
     @post = Post.find(params[:id])
     @post.assign_attributes(post_params)
 

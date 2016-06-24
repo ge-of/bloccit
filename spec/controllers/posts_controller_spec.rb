@@ -168,11 +168,10 @@ end
      it "updates post with expected attributes" do
        new_title = RandomData.random_sentence
        new_body = RandomData.random_paragraph
+      put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
 
-    put :update, topic_id: my_topic.id, id: my_post.id, post: {title: new_title, body: new_body}
 
-
-      updated_post = assigns(:post)
+      updated_post = assigns(:post) # @post
       expect(updated_post.id).to eq my_post.id
       expect(updated_post.title).to eq new_title
       expect(updated_post.body).to eq new_body
