@@ -43,7 +43,7 @@ topics = Topic.all
 
  user = User.first
  user.update_attributes!(
-   email: 'youremail.com', # replace this with your personal email
+   email: 'miles.geoff@gmail.com',
    password: 'helloworld'
  )
 
