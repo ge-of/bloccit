@@ -4,6 +4,8 @@ class TopicsController < ApplicationController
 
   before_action :authorize_admin_only, except: [:index, :show]
 
+  before_action :authorize_moderator_only, except: [:index, :show, :new, :destroy]
+
   def index
     @topics = Topic.all
   end
@@ -63,6 +65,13 @@ class TopicsController < ApplicationController
 
   def topic_params
     params.require(:topic).permit(:name, :description, :public)
+  end
+
+  def authorize_moderator_only
+    unless current_user.moderator?
+      flash[:alert] = "Need to be a mod. Try again."
+      redirect_to topics_path
+    end
   end
 
   def authorize_admin_only
