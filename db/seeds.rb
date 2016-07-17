@@ -36,8 +36,9 @@ topics = Topic.all
  100.times do
    Comment.create!(
  # #4
-     post: posts.sample,
-     body: RandomData.random_paragraph
+      user: users.sample,
+      post: posts.sample,
+      body: RandomData.random_paragraph
    )
  end
 
