@@ -1,0 +1,11 @@
+html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>You favorited your new post entitled "<%= @post.title %>", you'll be notified of all comments. </h1>
+    <p>
+      <%= link_to "View Your Post on site", topic_post_url(@post.topic, @post) %>
+    </p>
+  </body>
+</html>

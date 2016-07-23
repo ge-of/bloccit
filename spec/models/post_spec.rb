@@ -36,7 +36,7 @@ RSpec.describe Post, type: :model do
   end
 
   describe "voting" do
-# #5
+
     before do
       3.times { post.votes.create!(value: 1) }
       2.times { post.votes.create!(value: -1) }
