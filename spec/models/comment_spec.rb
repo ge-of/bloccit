@@ -8,6 +8,7 @@ RSpec.describe Comment, type: :model do
 
 # #2
     it { is_expected.to belong_to(:post) }
+    it { is_expected.to belong_to(:topic) }
     it { is_expected.to belong_to(:user) }
 # #3
     it { is_expected.to validate_presence_of(:body) }
