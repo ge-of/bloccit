@@ -24,7 +24,9 @@ get 'about' => 'welcome#about'
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index, :show, :create, :update]
-      resources :topics, except: [:edit, :new]
+      resources :topics, except: [:edit, :new] do
+        resources :posts, only: [:create, :update, :destroy]
+      end
     end
   end
 end
