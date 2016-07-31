@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
 
   before_action :authorize_admin_only, except: [:index, :show]
 
-  before_action :authorize_moderator_only, except: [:index, :show, :new, :create, :destroy]
+  before_action :authorize_moderator_only, only: [:update, :edit]
 
 
   def index
@@ -79,7 +79,7 @@ class TopicsController < ApplicationController
 
   def authorize_admin_only
     unless current_user.admin?
-      flash[:alert] = "Uh uh uh, what's the magic word?"
+      flash[:alert] = "You must be an admin to do that."
       redirect_to topics_path
     end
   end

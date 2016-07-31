@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 
   before_action :authorize_admin_only, except: [:index, :show]
 
-  before_action :authorize_moderator_only, except: [:index, :show, :destroy]
+  before_action :authorize_moderator_only, only: [:create, :edit, :update]
 
   def show
     @post = Post.find(params[:id])
