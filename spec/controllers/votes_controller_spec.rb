@@ -78,6 +78,10 @@ RSpec.describe VotesController, type: :controller do
         expect(user_post.votes.count).to eq(votes + 1)
       end
 
+      context 'with json' do
+        post :down_vote, post_id: user_post.id, format: :js
+      end
+
       it "the users second vote does not increase the number of votes" do
         post :down_vote, post_id: user_post.id
         votes = user_post.votes.count
