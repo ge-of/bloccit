@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
    before_action :require_sign_in
 
    before_action :authorize_user, only: [:destroy]
+   context
 
    def destroy
      @post = Post.find(params[:post_id])
@@ -34,6 +35,8 @@ class CommentsController < ApplicationController
      end
    end
 
+   context
+
    def destroy
      @topic = Topic.find(params[:post_id])
      comment = @topic.comments.find(params[:id])
@@ -48,7 +51,11 @@ class CommentsController < ApplicationController
    end
 
    def create
- # #11
+     if params[:topic_id].present?
+       # comment on a topic
+     elsif params[:post_id].present?
+       # commeont on a post
+     end
      @topic = Topic.find(params[:topic_id])
      comment = @topic.comments.new(comment_params)
      comment.user = current_user

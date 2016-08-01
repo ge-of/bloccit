@@ -9,6 +9,13 @@ RSpec.describe CommentsController, type: :controller do
   let(:my_comment) { Comment.create!(body: 'Comment Body', post: my_post, user: my_user) }
 
 # #6
+  context "commenting on a post" do
+
+  end
+
+  context "commenting on topic" do
+    
+  end
   context "guest" do
     describe "POST create" do
       it "redirects the user to the sign in view" do
