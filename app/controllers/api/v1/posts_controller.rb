@@ -14,9 +14,7 @@ class Api::V1::PostsController < Api::V1::BaseController
   end
 
   def create
-    topic = Topic.new(post_params)
-    post = topic.posts.build(post_params)
-
+    post = Post.new(post_params)
 
     if post.valid?
       post.save!
