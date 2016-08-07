@@ -1,1 +1,1 @@
-$("post-<%=@post.id%>").html('<%=escape_javascript @post.votes.count %>');
+$('#post-<%= @post.id %>-vote').html("<strong><%= @post.points %></strong>");
