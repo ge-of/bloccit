@@ -1,11 +1,8 @@
 class TopicsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
-
-  before_action :authorize_admin_only, except: [:index, :show]
-
-  before_action :authorize_moderator_only, only: [:update, :edit]
-
+  before_action :authorize_edit, only: [:edit, :update]
+  before_action :authorize_create_and_delete, only: [:new, :create, :destroy]
 
   def index
     @topics = Topic.all
@@ -19,17 +16,15 @@ class TopicsController < ApplicationController
     @topic = Topic.new
   end
 
-
   def create
     @topic = Topic.new(topic_params)
 
     if @topic.save
-     @topic.labels = Label.update_labels(params[:topic][:labels])
-     flash[:notice] = "Topic was saved successfully."
-     redirect_to @topic
+      flash[:notice] = "Topic was saved."
+      redirect_to @topic
     else
-     flash.now[:alert] = "Error creating topic. Please try again."
-     render :new
+      flash[:error] = "There was an error saving the topic. Please try again."
+      render :new
     end
   end
 
@@ -39,15 +34,13 @@ class TopicsController < ApplicationController
 
   def update
     @topic = Topic.find(params[:id])
-
     @topic.assign_attributes(topic_params)
 
     if @topic.save
-      @topic.labels = Label.update_labels(params[:topic][:labels])
-      flash[:notice] = "Topic was updated successfully."
+      flash[:notice] = "Topic was updated."
       redirect_to @topic
     else
-      flash.now[:alert] = "Error saving topic. Please try again."
+      flash[:error] = "There was an error updating the topic. Please try again."
       render :edit
     end
   end
@@ -56,10 +49,10 @@ class TopicsController < ApplicationController
     @topic = Topic.find(params[:id])
 
     if @topic.destroy
-      flash[:notice] = "\"#{@topic.name}\" was deleted successfully."
+      flash[:notice] = "\"#{@topic.name}\" was deleted successfully"
       redirect_to action: :index
     else
-      flash.now[:alert] = "There was an error deleting the topic."
+      flash[:error] = "There was an error deleting the topic."
       render :show
     end
   end
@@ -70,16 +63,16 @@ class TopicsController < ApplicationController
     params.require(:topic).permit(:name, :description, :public)
   end
 
-  def authorize_moderator_only
-    unless current_user.moderator?
-      flash[:alert] = "Need to be a mod. Try again."
+  def authorize_edit
+    unless current_user.moderator? || current_user.admin?
+      flash[:error] = "You must be an admin or mod to do that."
       redirect_to topics_path
     end
   end
 
-  def authorize_admin_only
+  def authorize_create_and_delete
     unless current_user.admin?
-      flash[:alert] = "You must be an admin to do that."
+      flash[:error] = "You must be an admin to do that."
       redirect_to topics_path
     end
   end

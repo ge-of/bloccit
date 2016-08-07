@@ -51,7 +51,7 @@ topics = Topic.all
  )
 
  # Create a moderator user
- moderator = User.create!(
+admin = User.create!(
    name:     'Moderator User',
    email:    'moderator@example.com',
    password: 'helloworld2',
