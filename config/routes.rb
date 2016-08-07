@@ -9,8 +9,8 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
     resources :favorites, only: [:create, :destroy]
 
-    post '/up-vote' => 'votes#up_vote', as: :up_vote
-    post '/down-vote' => 'votes#down_vote', as: :down_vote
+    put '/up-vote' => 'votes#up_vote', as: :up_vote
+    put '/down-vote' => 'votes#down_vote', as: :down_vote
   end
 
   resources :users, only: [:new, :create, :show]
