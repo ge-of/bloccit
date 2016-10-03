@@ -1,5 +1,7 @@
+include RandomData
+
 FactoryGirl.define do
   factory :label do
-    name 'My Factory Label'
+    name RandomData.random_word
   end
 end

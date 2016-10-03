@@ -1,6 +1,8 @@
+include RandomData
+
 FactoryGirl.define do
   factory :vote do
-    value 1
+    value RandomData.random_value
     user
     post
   end
